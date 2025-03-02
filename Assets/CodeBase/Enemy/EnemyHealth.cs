@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Logic;
+using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -7,6 +8,7 @@ namespace CodeBase.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
+        [SerializeField] private ActorUI _actorUI;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _current;
         [SerializeField] private float _max;
@@ -24,6 +26,11 @@ namespace CodeBase.Enemy
         {
             get => _max;
             set => _max = value;
+        }
+
+        private void Awake()
+        {
+            if(_actorUI != null) _actorUI.Construct(this);
         }
 
         public void TakeDamage(float damage)

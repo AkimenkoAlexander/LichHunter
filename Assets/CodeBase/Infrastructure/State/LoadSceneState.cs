@@ -54,7 +54,7 @@ namespace CodeBase.Infrastructure.State
             CameraFollow(player);
         }
 
-        private GameObject InitHUD( GameObject player)
+        private GameObject InitHUD(GameObject player)
         {
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());

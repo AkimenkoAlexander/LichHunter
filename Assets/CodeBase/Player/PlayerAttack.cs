@@ -75,7 +75,6 @@ namespace CodeBase.Player
         {
             for (int i = 0; i < Hit(); i++)
             {
-                Debug.Log("Target");
                _hits[i].transform.parent.GetComponentInParent<IHealth>().TakeDamage(_stats.Damage);
             }
         }
