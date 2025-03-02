@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Enemy
 {
-    public class LichAnimator : MonoBehaviour, IAnimationStateReader
+    public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
     {
         #region Hash
         private static readonly int Die = Animator.StringToHash("Die");

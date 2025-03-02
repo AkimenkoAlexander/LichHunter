@@ -4,7 +4,7 @@ using CodeBase.Enemy;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.UI;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Player
@@ -14,7 +14,7 @@ namespace CodeBase.Player
     {
         [SerializeField] private PlayerAnimator _animator;
         [SerializeField] private CharacterController _controller;
-
+        
         private IGameFactory _gameFactory;
         private Stats _stats;
         
@@ -25,7 +25,7 @@ namespace CodeBase.Player
         
         
         private Coroutine _attackCooldown;
-        private Collider[] _hits;
+        private Collider[] _hits = new Collider[7];
         
         private  static int _layerMask;
 
@@ -42,7 +42,6 @@ namespace CodeBase.Player
             {
                 _animator.PlayJumpAttack();
             }
-
             CheckInputAttackButton();
         }
 
@@ -76,17 +75,18 @@ namespace CodeBase.Player
         {
             for (int i = 0; i < Hit(); i++)
             {
-              //  _hits[i].GetComponent<IHealth>().TakeDamage();
+                Debug.Log("Target");
+               _hits[i].transform.parent.GetComponentInParent<IHealth>().TakeDamage(_stats.Damage);
             }
         }
 
         private int Hit()
         {
-            PhysicsDebug.DrawDebug(StartPoint() + transform.forward,_stats.DamageRadius,2);
+            PhysicsDebug.DrawDebug(StartPoint() + transform.forward, _stats.DamageRadius,2);
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward, _stats.DamageRadius, _hits,_layerMask);
         }
         private Vector3 StartPoint() =>
-            new Vector3(transform.position.x, _controller.center.y / 2, transform.position.z);
+            new Vector3(transform.position.x, transform.position.y + _controller.center.y / 2 , transform.position.z);
         private void InstAttackButton() =>
             _attackButton = GetButtonAttack();
         private AttackButtonHandler GetButtonAttack() => 
@@ -96,10 +96,7 @@ namespace CodeBase.Player
         {
             _animator.FinishingNextAttack();
         }
-        public void LoadProgress(PlayerProgress progress)
-        {
-           
-        }
+        public void LoadProgress(PlayerProgress progress) => _stats = progress.PlayerStats;
 
         private IEnumerator TimeForNextAttack()
         {

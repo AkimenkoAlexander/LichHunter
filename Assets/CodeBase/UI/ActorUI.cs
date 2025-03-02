@@ -1,4 +1,5 @@
 
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -7,23 +8,21 @@ namespace CodeBase.UI
     {
         [SerializeField] private HPBar _hpBar;
 
-        private IHealth _playerStateHealth;
+        private IHealth _healthStatus;
 
-        private void OnDestroy()
+        private void OnDestroy ()
         {
-            _playerStateHealth.ChangeHP -= UpdateHPBar;
+            if(_healthStatus != null) _healthStatus.ChangeHP -= UpdateHPBar;
         }
 
         public void Construct(IHealth stateHealth)
         {
-            _playerStateHealth = stateHealth;
-            _playerStateHealth.ChangeHP += UpdateHPBar;
+            _healthStatus = stateHealth;
+            _healthStatus.ChangeHP += UpdateHPBar;
 
         }
 
-        private void UpdateHPBar()
-        {
-            _hpBar.SetValue(_playerStateHealth.CurrentHP, _playerStateHealth.MaxHP);
-        }
+        private void UpdateHPBar() => 
+            _hpBar.SetValue(_healthStatus.CurrentHP, _healthStatus.MaxHP);
     }
 }

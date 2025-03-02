@@ -1,7 +1,7 @@
 using System;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.UI;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Player

@@ -27,7 +27,7 @@ namespace CodeBase.Player
             {
                 _move.enabled = false;
                 _animator.PlayDeath();
-                Instantiate(_deathVFX, transform.position, quaternion.identity);
+                Instantiate(_deathVFX, transform.position, Quaternion.identity);
             }
         }
     }

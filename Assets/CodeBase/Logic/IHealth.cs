@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.UI
+namespace CodeBase.Logic
 {
     public interface IHealth
     {
@@ -8,5 +8,7 @@ namespace CodeBase.UI
         
         float CurrentHP { get; set; }
         float MaxHP { get; set; }
+        
+        public void TakeDamage( float damage);
     }
 }

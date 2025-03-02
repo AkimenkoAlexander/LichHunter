@@ -1,7 +1,7 @@
 using System.Linq;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
-using CodeBase.Player;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -10,7 +10,7 @@ namespace CodeBase.Enemy
     {
         public float AttackCooldown;
         
-        [SerializeField] private LichAnimator _animator;
+        [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _effectiveDistance = 0.5f;
         [SerializeField] private float _damage = 10.0f;
 
@@ -30,10 +30,8 @@ namespace CodeBase.Enemy
             _layerMask = 1 << LayerMask.NameToLayer("Player");
         }
 
-        private void Start()
-        {
+        private void Start() => 
             InitializePlayerCreatedHandler();
-        }
 
         private void Update()
         {
@@ -49,17 +47,15 @@ namespace CodeBase.Enemy
 
         private void OnAttack()
         {
-    
             if (Hit(out Collider hit))
             {
                 PhysicsDebug.DrawDebug(StartPoint(),_cleavage,1);
-                hit.transform.GetComponent<PlayerHealth>().TakeDamage(_damage);
+                hit.transform.GetComponent<IHealth>().TakeDamage(_damage);
             }
         }
 
         private void StartAttack()
         {
-            Debug.Log("StartAttack");
             transform.LookAt(_playerTransform);
             _animator.PlayAttack();
             _isAttacking = true;

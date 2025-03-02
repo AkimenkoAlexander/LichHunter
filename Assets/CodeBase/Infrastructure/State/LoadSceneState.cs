@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.State
 {
-    public class LoadLevelState : IPayLoadedState<string>
+    public class LoadSceneState : IPayLoadedState<string>
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -16,9 +16,8 @@ namespace CodeBase.Infrastructure.State
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
+        public LoadSceneState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
             IGameFactory gameFactory, IPersistentProgressService progressService)
-        
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -62,17 +61,12 @@ namespace CodeBase.Infrastructure.State
             return hud;
         }
 
-        private GameObject CreatePlayer()
-        {
-            return _gameFactory.CreatePlayer(GameObject.FindObjectOfType<InitializePoint>().gameObject);
-        }
+        private GameObject CreatePlayer() => 
+            _gameFactory.CreatePlayer(GameObject.FindObjectOfType<InitializePoint>().gameObject);
 
         private static void CameraFollow(GameObject player) => 
             Camera.main.GetComponent<CameraFollow>().Follow(player);
 
-        public void Exit()
-        {
-           _curtain.Hide();
-        }
+        public void Exit() => _curtain.Hide();
     }
 }

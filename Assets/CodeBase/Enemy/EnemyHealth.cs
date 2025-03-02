@@ -1,21 +1,17 @@
 using System;
-using CodeBase.UI;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
 {
-    [RequireComponent(typeof(LichAnimator))]
-    public class EnemyHealth : IHealth
+    [RequireComponent(typeof(EnemyAnimator))]
+    public class EnemyHealth : MonoBehaviour, IHealth
     {
-         [SerializeField] private LichAnimator _animator;
-
-         // [SerializeField]
-         // private IActor;
-         private float _current;
-         private float _max;
+        [SerializeField] private EnemyAnimator _animator;
+        [SerializeField] private float _current;
+        [SerializeField] private float _max;
      
-
-
+        
         public event Action ChangeHP;
 
         public float CurrentHP
@@ -28,6 +24,14 @@ namespace CodeBase.Enemy
         {
             get => _max;
             set => _max = value;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            Debug.Log("TakeDamage");
+            _current -= damage;
+            _animator.PlayHit();
+            ChangeHP?.Invoke();
         }
     }
 }
