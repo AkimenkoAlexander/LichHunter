@@ -11,25 +11,30 @@ namespace CodeBase.Enemy
         [SerializeField] private GameObject _deathVFX;
         [SerializeField] private AgentMoveToPlayer _moveToPlayer;
 
-        public event Action Happened;
+        public event Action HappenedDeath;
 
-        private void Start() =>
-            _health.ChangeHP += HealthChanged;
+        private void Start() => _health.ChangeHP += HealthChanged;
 
-        private void OnDestroy() => 
-            _health.ChangeHP -= HealthChanged;
+
+        private void OnDestroy() => _health.ChangeHP -= HealthChanged;
 
         private void HealthChanged()
         {
             if (_health.CurrentHP <=0) Die();
         }
 
+  
+        
+
+  
+
         private void Die()
         {
           _animator.PlayDeath();
           Instantiate(_deathVFX, transform.position, Quaternion.identity);
           _moveToPlayer.enabled = false;
-          Happened?.Invoke();
+          HappenedDeath?.Invoke();
+          
           Destroy(gameObject, 3.0f);
         }
     }
