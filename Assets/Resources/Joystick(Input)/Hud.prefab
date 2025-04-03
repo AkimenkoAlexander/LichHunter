@@ -373,8 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4203d665125143feb03489a758b792b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPressed: 0
-  buttonName: Fight
 --- !u!1 &5105313259979873398
 GameObject:
   m_ObjectHideFlags: 0
