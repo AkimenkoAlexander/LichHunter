@@ -9,20 +9,21 @@ namespace CodeBase.Enemy
         [SerializeField] private Follow _follow;
         [SerializeField] private float _cooldown;
         
-        private bool _hasAggroTarget;
-        private Coroutine _aggroCoroutine;
+        private bool hasAggroTarget;
+        private Coroutine aggroCoroutine;
         private void Start()
         {
             _triggerObserver.TriggerEnter += TriggerEnter;
             _triggerObserver.TriggerExit += TriggerExit;
         }
 
+        
         private void TriggerEnter( Collider obj)
         {
-            if (!_hasAggroTarget)
+            if (!hasAggroTarget)
             {
                 SwitchFollowOn();
-                _hasAggroTarget = true;
+                hasAggroTarget = true;
                 StopAggroCoroutine();
             }
          
@@ -30,19 +31,19 @@ namespace CodeBase.Enemy
 
         private void TriggerExit( Collider obj)
         {
-            if (_hasAggroTarget)
+            if (hasAggroTarget)
             {
-                _aggroCoroutine = StartCoroutine(SwitchFollowOffAfterCooldown());
-                _hasAggroTarget = false;
+                aggroCoroutine = StartCoroutine(SwitchFollowOffAfterCooldown());
+                hasAggroTarget = false;
             }
         }
 
         private void StopAggroCoroutine()
         {
-            if (_aggroCoroutine != null)
+            if (aggroCoroutine != null)
             {
-                StopCoroutine(_aggroCoroutine);
-                _aggroCoroutine = null;  
+                StopCoroutine(aggroCoroutine);
+                aggroCoroutine = null;  
             }
         }
 
@@ -50,7 +51,7 @@ namespace CodeBase.Enemy
         {
             yield return new WaitForSeconds(_cooldown);
             SwitchFollowOff();
-            _hasAggroTarget = false;
+            hasAggroTarget = false;
         }
 
         private void SwitchFollowOn() => _follow.enabled = true;
