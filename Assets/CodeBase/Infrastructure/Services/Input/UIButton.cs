@@ -1,6 +1,9 @@
-public interface UIButton
+namespace CodeBase.Infrastructure.Services.Input
 {
-    bool IsPressed { get; set; }
-    void ButtonDown();
-    void ButtonUp();
+    public interface UIButton
+    {
+        bool IsPressed { get; set; }
+        void ButtonDown();
+        void ButtonUp();
+    }
 }

@@ -16,6 +16,7 @@ namespace CodeBase.Infrastructure.State
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
 
+        private const string EnemySpawnerTag = "EnemySpawner";
         public LoadSceneState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
             IGameFactory gameFactory, IPersistentProgressService progressService)
         {
@@ -49,9 +50,20 @@ namespace CodeBase.Infrastructure.State
         }
         private void InitialGameWorld()
         {
+            InitSpawners();
             GameObject player = CreatePlayer();
             InitHUD(player);
             CameraFollow(player);
+        }
+
+        private void InitSpawners()
+        {
+     
+            foreach (GameObject spawnerGameObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+            {
+                var enemySpawner = spawnerGameObject.GetComponent<EnemySpawner>();
+                _gameFactory.Register(enemySpawner);
+            }
         }
 
         private GameObject InitHUD(GameObject player)
