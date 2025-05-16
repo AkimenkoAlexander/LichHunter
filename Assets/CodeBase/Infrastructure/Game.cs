@@ -11,8 +11,6 @@ namespace CodeBase.Infrastructure
         {
             StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner),curtain, AllServices.Container());
         }
-     
-        
     }
 }
 

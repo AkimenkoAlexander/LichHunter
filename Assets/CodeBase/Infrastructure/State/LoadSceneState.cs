@@ -16,7 +16,7 @@ namespace CodeBase.Infrastructure.State
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
 
-        private const string EnemySpawnerTag = "EnemySpawner";
+        private const string  EnemySpawnerTag = "EnemySpawner";
         public LoadSceneState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, 
             IGameFactory gameFactory, IPersistentProgressService progressService)
         {

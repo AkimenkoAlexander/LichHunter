@@ -8,4 +8,4 @@ namespace CodeBase.Data
     {
         public List<string> ClearSpawners = new List<string>();
     }
-}
+} 

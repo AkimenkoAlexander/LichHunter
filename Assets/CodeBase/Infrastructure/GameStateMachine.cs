@@ -15,11 +15,11 @@ namespace CodeBase.Infrastructure
         private IExitableState _activeState;
 
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, AllServices services)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, AllServices services  )
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootStrappState)] = new BootStrappState(this, sceneLoader,services),
+                [typeof(BootStrapState)] = new BootStrapState(this, sceneLoader,services),
                 [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader,curtain, services.Single<IGameFactory>(),services.Single<IPersistentProgressService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(),services.Single<ISaveLoadSrvice>()),
                 [typeof(GameLoopState)] = new GameLoopState(this)
@@ -37,7 +37,7 @@ namespace CodeBase.Infrastructure
             state.Enter(payLoad);
         }
         private TState ChangeState<TState>() where TState:class, IExitableState
-        {
+        {	
            _activeState?.Exit();
            TState state = GetState<TState>();
            _activeState = state;

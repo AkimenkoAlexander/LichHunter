@@ -11,11 +11,9 @@ namespace CodeBase.Logic
         public MonsterTypeId MonsterTypeId;
         private string _id;
         public bool Slain;
-        
-        private void Awake()
-        {
-            _id = GetComponent<UniqueId>().Id;
-        }
+
+        private void Awake() => _id = GetComponent<UniqueId>().Id;
+
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -27,10 +25,6 @@ namespace CodeBase.Logic
                 Spawn();
         }
 
-        private void Spawn()
-        {
-         
-        }
 
         public void UpdateProgress(PlayerProgress progress)
         {
@@ -39,6 +33,10 @@ namespace CodeBase.Logic
                 progress.KillData.ClearSpawners.Add(_id);
             }
         }
-    }
 
+        private void Spawn()
+        {
+            
+        }
+    }
 }

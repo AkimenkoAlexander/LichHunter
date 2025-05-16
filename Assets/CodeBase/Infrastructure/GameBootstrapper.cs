@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure
         private void Awake()
         {
             _game = new Game(this, Instantiate(CurtainPrefab));
-            _game.StateMachine.Enter<BootStrappState>();
+            _game.StateMachine.Enter<BootStrapState>(); 
             DontDestroyOnLoad(this);
         }
     }

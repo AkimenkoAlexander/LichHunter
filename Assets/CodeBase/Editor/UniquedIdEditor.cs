@@ -12,9 +12,10 @@ namespace CodeBase.Editor
     {
         private void OnEnable()
         {
-            var uniqueId = (UniqueId)target; // It is necessary to rewind the type to use the ID field
+            var uniqueId = (UniqueId) target; // It is necessary to rewind the type to use the ID field
             
             if(string.IsNullOrEmpty(uniqueId.Id)) Generate(uniqueId);
+            
             else
             {
                 UniqueId[] uniqueIds = FindObjectsOfType<UniqueId>();

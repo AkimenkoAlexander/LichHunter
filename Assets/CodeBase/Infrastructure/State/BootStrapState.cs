@@ -2,23 +2,21 @@
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
-using UnityEngine;
 using IAssetProvider = CodeBase.Infrastructure.AssetManagment.IAssetProvider;
 
 
 namespace CodeBase.Infrastructure.State
 {
-    public class BootStrappState : IState
+    public class BootStrapState : IState
     {
         private const string INITIAL = "InitializeScene";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
 
-        public BootStrappState (GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
+        public BootStrapState (GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
