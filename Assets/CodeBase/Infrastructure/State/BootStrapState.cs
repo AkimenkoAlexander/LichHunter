@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.StaticData;
 using IAssetProvider = CodeBase.Infrastructure.AssetManagment.IAssetProvider;
 
 
@@ -43,9 +44,15 @@ namespace CodeBase.Infrastructure.State
          _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
          _services.RegisterSingle<IPersistentProgressService>( new PersistentProgressService());
          _services.RegisterSingle<ISaveLoadSrvice>( new SaveLoadService( _services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
-      
+
+         RegisterStaticData();
         }
 
-       
+        private void RegisterStaticData()
+        {
+            IStaticDataService staticData = new StaticDataService();
+            staticData.LoadMonsters();
+            _services.RegisterSingle(staticData);
+        }
     }
 }
