@@ -10,7 +10,8 @@ namespace CodeBase.StaticData
         public int Hp;
         [Range(1,30)]
         public float Damage;
-        
+        [Range(1,50)]
+        public float MoveSpeed;
         [Range(0.5f,1)]
         public float EffectiveDistance;
         [Range(0.5f,1)]

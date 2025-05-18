@@ -40,12 +40,11 @@ namespace CodeBase.Infrastructure.State
 
         private void RegisterServices()
         {
+            RegisterStaticData();
          _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
+         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
          _services.RegisterSingle<IPersistentProgressService>( new PersistentProgressService());
          _services.RegisterSingle<ISaveLoadSrvice>( new SaveLoadService( _services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
-
-         RegisterStaticData();
         }
 
         private void RegisterStaticData()

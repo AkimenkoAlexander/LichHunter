@@ -1,5 +1,3 @@
-using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,30 +9,18 @@ namespace CodeBase.Enemy
         public NavMeshAgent Agent;
         private Transform _player;
 
-        private IGameFactory _gameFactory;
-        private void Start()
-        {
-            _gameFactory = AllServices.Container().Single<IGameFactory>();
-            if (_gameFactory.PlayerGameObject !=null)
-            {
-                GetPlayerTransform();
-            }
-            else
-            {
-                _gameFactory.PlayerCreated += GetPlayerTransform;
-            }
-            
-        }
+        public void Construct(Transform herTransform) =>
+            _player = herTransform;
 
-        void Update()
+        void Update() => 
+            SetDestinationForPlayer();
+
+        private void SetDestinationForPlayer()
         {
-            if (_player != null )
+            if (_player != null)
             {
                 Agent.SetDestination(_player.position);
             }
         }
-
-        private void GetPlayerTransform() => 
-            _player = _gameFactory.PlayerGameObject.transform;
     }
 }
