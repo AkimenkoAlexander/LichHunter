@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5875259621874618737}
   - component: {fileID: 8954216034195451775}
   - component: {fileID: 6530940905662882230}
+  - component: {fileID: -1170443580188492701}
   m_Layer: 0
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -157,8 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackCooldown: 2
   _animator: {fileID: 4595102155531300166}
-  _effectiveDistance: 0.5
-  _damage: 10
+  EffectiveDistance: 0.5
+  Damage: 10
+  Cleavage: 0.5
 --- !u!114 &6070838393358402442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 4447745778932069931}
+--- !u!114 &-1170443580188492701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248815240492774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6494796e7098449bbbb3f817f953a465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDeath: {fileID: 8954216034195451775}
 --- !u!1 &1001222032718319718
 GameObject:
   m_ObjectHideFlags: 0

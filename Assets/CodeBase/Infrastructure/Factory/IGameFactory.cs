@@ -23,5 +23,6 @@ namespace CodeBase.Infrastructure.Factory
         void Cleanup();
         void Register(ISavedProgressReader progressReader);
         GameObject CreateMonsters(MonsterTypeId typeId, Transform parent);
+        GameObject CreateLoot();
     }
 }

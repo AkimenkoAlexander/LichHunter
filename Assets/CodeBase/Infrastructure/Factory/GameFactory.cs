@@ -30,7 +30,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject Hud { get; set; }
 
 
-      //  public event Action PlayerCreated;
+
 
         public event Action HudCreated;
 
@@ -38,7 +38,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreatePlayer(GameObject at)
         {
             PlayerGameObject = InstantiateRegister(AssetPath.PlayerPrefabPath, at.transform);
-          //  PlayerCreated?.Invoke();
             return PlayerGameObject;
         }
 
@@ -63,6 +62,7 @@ namespace CodeBase.Infrastructure.Factory
             monster.GetComponent<ActorUI>().Construct(health);
             monster.GetComponent<AgentMoveToPlayer>().Construct(PlayerGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
+            monster.GetComponent<LootSpawner>().Construct(this, monsterData.LootMin, monsterData.LootMax);
             var attack = monster.GetComponent<Attack>();
             attack.Construct(PlayerGameObject.transform);
             attack.Damage = monsterData.Damage;
@@ -72,6 +72,9 @@ namespace CodeBase.Infrastructure.Factory
 
             return monster;
         }
+
+        public GameObject CreateLoot() => 
+            InstantiateRegister(AssetPath.LootPrefabPath);
 
         private GameObject InstantiateRegister(string prefabPath)
         {
