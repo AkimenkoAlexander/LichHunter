@@ -1,6 +1,8 @@
 ﻿using System;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Enemy
 {
@@ -17,21 +19,30 @@ namespace CodeBase.Enemy
             SetLoot(minLoot, maxLoot);
         }
 
+
+        private void Start() => _enemyDeath.HappenedDeath += SpawnLoot;
+
+        private void SpawnLoot()
+        {
+            LootPiece loot = gameFactory.CreateLoot();
+            loot.transform.position = transform.position;
+            Loot lootItem = GenerateLoot();
+                
+            loot.Initialize(lootItem);
+        }
+
+        private Loot GenerateLoot()
+        {
+            return new Loot
+            {
+                Value = Random.Range(minLoot, maxLoot)
+            };
+        }
+
         private void SetLoot(int min, int max)
         {
            minLoot = min;
            maxLoot = max;
-        }
-
-        private void Start()
-        {
-            _enemyDeath.HappenedDeath += SpawnLoot;
-        }
-
-        private void SpawnLoot()
-        {
-            GameObject loot = gameFactory.CreateLoot();
-            loot.transform.position = transform.position;
         }
     }
 }
