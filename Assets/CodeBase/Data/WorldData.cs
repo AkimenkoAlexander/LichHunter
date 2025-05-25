@@ -12,6 +12,7 @@ namespace CodeBase.Data
         public WorldData(string initialLevel)
         {
             PositionOnLevel = new PositionOnLevel(initialLevel);
+            LootData = new LootData();
         }
     }
 }
