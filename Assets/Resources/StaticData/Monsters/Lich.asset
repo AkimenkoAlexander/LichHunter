@@ -15,6 +15,9 @@ MonoBehaviour:
   MonsterTypeId: 0
   Hp: 50
   Damage: 10
+  LootMin: 10
+  LootMax: 31
+  MoveSpeed: 1
   EffectiveDistance: 0.5
   Cleavage: 0.5
   Prefab: {fileID: 5522526317054316986, guid: c07f9e58886a2c34e9206d67d1e914ea, type: 3}

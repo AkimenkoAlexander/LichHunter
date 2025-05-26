@@ -14,7 +14,7 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreatePlayer(GameObject at);
      //   event Action PlayerCreated;
         
-        GameObject Hud { get; set; }
+        GameObject hud { get; set; }
         event Action HudCreated;
         GameObject CreateHud();
 

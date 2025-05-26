@@ -90,7 +90,7 @@ namespace CodeBase.Player
         private void InstAttackButton() =>
             _attackButton = GetButtonAttack();
         private AttackButtonHandler GetButtonAttack() => 
-            _gameFactory.Hud.GetComponentInChildren<AttackButtonHandler>();
+            _gameFactory.hud.GetComponentInChildren<AttackButtonHandler>();
 
         private void FinishLastAttack()
         {

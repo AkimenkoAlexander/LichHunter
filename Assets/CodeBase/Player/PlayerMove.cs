@@ -23,7 +23,7 @@ namespace CodeBase.Player
      private void Start()
      {
        _gameFactory = AllServices.Container().Single<IGameFactory>();
-       if (_gameFactory.Hud !=null)
+       if (_gameFactory.hud !=null)
        {
          GetInputService();
        }
@@ -73,7 +73,7 @@ namespace CodeBase.Player
 
 
     private void GetInputService() => 
-      _joystick = _gameFactory.Hud.GetComponentInChildren<Joystick>();
+      _joystick = _gameFactory.hud.GetComponentInChildren<Joystick>();
 
     public void UpdateProgress(PlayerProgress progress)
     {

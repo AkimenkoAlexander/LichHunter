@@ -30,7 +30,7 @@ namespace CodeBase.Infrastructure.Factory
         }
 
         public GameObject PlayerGameObject { get; set; }
-        public GameObject Hud { get; set; }
+        public GameObject hud { get; set; }
 
 
 
@@ -46,9 +46,10 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHud()
         {
-            Hud = InstantiateRegister(AssetPath.HudPath);
+            hud = InstantiateRegister(AssetPath.HudPath);
+            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
             HudCreated?.Invoke();
-            return Hud;
+            return hud;
         }
 
         public GameObject CreateMonsters(MonsterTypeId typeId, Transform parent)
